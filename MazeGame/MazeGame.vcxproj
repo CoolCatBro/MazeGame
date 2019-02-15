@@ -120,14 +120,18 @@
     <ClInclude Include="Engine\Globals.hpp" />
     <ClInclude Include="Engine\SceneGraph.hpp" />
     <ClInclude Include="Engine\Sprite.hpp" />
+    <ClInclude Include="Graph.hpp" />
     <ClInclude Include="Maze.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Globals.cpp" />
-    <ClCompile Include="Engine\SceneGraph.cpp" />
+    <ClCompile Include="Engine\SceneGraph.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Engine\Sprite.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>

@@ -17,61 +17,77 @@ Maze::Maze(Scene* scene,int width, int height)
 	Layer::addNode(cell);
 }
 
-void Maze::_createPath(deque<vector<int> >& path,int x, int y,int d=0)
+void Maze::_createPath(Graph& graph,Vertex* V)
 {
-	if (maze[y][x])
+	if (maze[V->y][V->x])
 	{
-		path.push_back(vector<int>{d,x,y});
-		maze[y][x] = 0;
+		graph.addEdge(V);
+		maze[V->y][V->x] = 0;
 	}
 
-	if (_getNeighbour(x, y, 1) || _getNeighbour(x, y, 2) || _getNeighbour(x, y, 3) || _getNeighbour(x, y, 4))
+	if (_getNeighbour(V, 1) || _getNeighbour(V, 2) || _getNeighbour(V, 3) || _getNeighbour(V, 4))
 	{
 		int t = rand() % 4 + 1;
 
-		while (!_getNeighbour(x, y, t))
+		while (!_getNeighbour(V, t))
 			t = rand() % 4 + 1;
 
 		switch (t)
 		{
 		case 1:
-			_createPath(path, x + 1, y, 1);
-			break;
-		case 2:
-			_createPath(path, x - 1, y, 2);
-			break;
-		case 3:
-			_createPath(path, x, y + 1, 3);
-			break;
-		case 4:
-			_createPath(path, x, y - 1, 4);
+		{
+			Vertex* vt = new Vertex(V->x + 1, V->y, 1);
+			V->addEdge(vt);
+			_createPath(graph, vt);
 			break;
 		}
-		_createPath(path,x, y);
+		case 2:
+		{
+			Vertex* vt = new Vertex(V->x - 1, V->y, 2);
+			V->addEdge(vt);
+			_createPath(graph, vt);
+			break;
+		}
+		case 3:
+		{
+			Vertex* vt = new Vertex(V->x, V->y + 1, 3);
+			V->addEdge(vt);
+			_createPath(graph, vt);
+			break;
+		}
+		case 4:
+		{
+			Vertex* vt = new Vertex(V->x, V->y - 1, 4);
+			V->addEdge(vt);
+			_createPath(graph, vt);
+			break;
+		}
+		}
+		_createPath(graph,V);
 	}
 }
 
-bool Maze::_getNeighbour(int x, int y, int t)
+bool Maze::_getNeighbour(Vertex* V, int t)
 {
 	switch (t)
 	{
 	case 1:
-		if ((x + 1 >= 0 && x + 1 < width) && maze[y][x + 1])
+		if ((V->x + 1 >= 0 && V->x + 1 < width) && maze[V->y][V->x + 1])
 			return true;
 		break;
 
 	case 2:
-		if ((x - 1 >= 0 && x - 1 < width) && maze[y][x - 1])
+		if ((V->x - 1 >= 0 && V->x - 1 < width) && maze[V->y][V->x - 1])
 			return true;
 		break;
 
 	case 3:
-		if ((y + 1 >= 0 && y + 1 < height) && maze[y + 1][x])
+		if ((V->y + 1 >= 0 && V->y + 1 < height) && maze[V->y + 1][V->x])
 			return true;
 		break;
 
 	case 4:
-		if ((y - 1 >= 0 && y - 1 < height) && maze[y - 1][x])
+		if ((V->y - 1 >= 0 && V->y - 1 < height) && maze[V->y - 1][V->x])
 			return true;
 		break;
 	}
@@ -80,46 +96,103 @@ bool Maze::_getNeighbour(int x, int y, int t)
 
 void Maze::createMaze()
 {
-	deque<vector<int> > path;
-	_createPath(path,0, 0);
+	_createPath(graph,new Vertex(0,0,0));
 
 
-	while(!path.empty())
+	for(auto i = graph.Edges.begin(); i!=graph.Edges.end(); i++)
 	{
-		int x = path.front()[1];
-		int y = path.front()[2];
-		int i = y * width + x;
-
-		switch (path.front()[0])
+		for (auto j = (*i)->Edges.begin(); j != (*i)->Edges.end(); j++)
 		{
-		case 1:
-			cell->removeSide(i, 2);
-			x--; i = y * width + x;
-			if(i>=0 && i<cell->nframe)
-			cell->removeSide(i, 1);
-			break;
-		case 2:
-			cell->removeSide(i, 1);
-			x++; i = y * width + x;
-			if (i >= 0 && i < cell->nframe)
-			cell->removeSide(i, 2);
-			break;
-		case 3:
-			cell->removeSide(i, 4);
-			y--; i = y * width + x;
-			if (i >= 0 && i < cell->nframe)
-			cell->removeSide(i, 3);
-			break;
-		case 4:
-			cell->removeSide(i, 3);
-			y++; i = y * width + x;
-			if (i >= 0 && i < cell->nframe)
-			cell->removeSide(i, 4);
-			break;
+			int x = (*j)->x;
+			int y = (*j)->y;
+			int k = y * width + x;
+
+			switch ((*j)->d)
+			{
+			case 1:
+				cell->removeSide(k, 2);
+				x--; k = y * width + x;
+				if (k >= 0 && k < cell->nframe)
+					cell->removeSide(k, 1);
+				break;
+			case 2:
+				cell->removeSide(k, 1);
+				x++; k = y * width + x;
+				if (k >= 0 && k < cell->nframe)
+					cell->removeSide(k, 2);
+				break;
+			case 3:
+				cell->removeSide(k, 4);
+				y--; k = y * width + x;
+				if (k >= 0 && k < cell->nframe)
+					cell->removeSide(k, 3);
+				break;
+			case 4:
+				cell->removeSide(k, 3);
+				y++; k = y * width + x;
+				if (k >= 0 && k < cell->nframe)
+					cell->removeSide(k, 4);
+				break;
+			}
 		}
-		path.pop_front();
 	}
 	
+}
+
+void Maze::findPath()
+{
+	deque<Vertex*> que;
+	Vertex*** pred;
+
+	pred = new Vertex**[height];
+	for (int i = 0; i < height; i++)
+	{
+		pred[i] = new Vertex*[width];
+		for (int j = 0; j < width; j++)
+		{
+			pred[i][j] = nullptr;
+		}
+	}
+
+	que.push_back(graph.Edges.front());
+
+	while (!que.empty())
+	{
+		maze[que[0]->y][que[0]->x] = 1;
+
+		if (que[0]->x == width - 1 && que[0]->y == height - 1)
+		{
+			spath.push_front(pair<int,int>(width - 1, height - 1));
+			break;
+		}
+
+		for (auto i = que[0]->Edges.begin(); i != que[0]->Edges.end(); i++)
+		{
+			if (!maze[(*i)->y][(*i)->x])
+			{
+				que.push_back(*i);
+				pred[(*i)->y][(*i)->x] = que[0];
+			}
+		}
+		que.pop_front();
+	}
+
+	Vertex* tmp = que[0];
+	while (tmp)
+	{
+		spath.push_front(pair<int,int>(tmp->x, tmp->y));
+		tmp = pred[tmp->y][tmp->x];
+	}
+
+	int i = 0, k = 0;
+	while (i!=spath.size()-1)
+	{
+		k = spath[i].second*width + spath[i].first;
+		cell->setValue(" * ", k);
+		i++;
+	}
+	cell->setValue(" S ", 0);
+	cell->setValue(" E ", cell->nframe - 1);
 }
 
 void Maze::render(double &dt)
@@ -128,8 +201,9 @@ void Maze::render(double &dt)
 	for (int i = 0; i < cell->nframe; i++)
 	{
 		cell->cell = i;
+
 		cell->render(dt);
-		scene->game.refresh();
+
 		cell->x += cell->width;
 
 		if (cell->x >= (cell->width*width))

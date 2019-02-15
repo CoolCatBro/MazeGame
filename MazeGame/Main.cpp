@@ -11,6 +11,7 @@ int main()
 	gm.addLayer(maze);
 	gm.load();
 	maze->createMaze();
+	maze->findPath();
 	gm.render(k);
 	gm.game.refresh();
 	system("pause");
