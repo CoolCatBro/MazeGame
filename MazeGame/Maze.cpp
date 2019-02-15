@@ -3,7 +3,7 @@
 using namespace std;
 
 Maze::Maze(Scene* scene,int width, int height)
-	 :Layer(scene,"maze"),width(width),height(height)
+	 :Layer(scene,"maze"),width(width),height(height),dist(1,4)
 {
 	maze = new int*[height];
 	for (int i = 0; i < height; i++)
@@ -15,6 +15,8 @@ Maze::Maze(Scene* scene,int width, int height)
 
 	cell = new Cell(scene, width*height);
 	Layer::addNode(cell);
+
+	rng.seed(std::random_device()());
 }
 
 void Maze::_createPath(Graph& graph,Vertex* V)
@@ -27,10 +29,10 @@ void Maze::_createPath(Graph& graph,Vertex* V)
 
 	if (_getNeighbour(V, 1) || _getNeighbour(V, 2) || _getNeighbour(V, 3) || _getNeighbour(V, 4))
 	{
-		int t = rand() % 4 + 1;
+		int t = dist(rng);
 
 		while (!_getNeighbour(V, t))
-			t = rand() % 4 + 1;
+			t = dist(rng);
 
 		switch (t)
 		{
