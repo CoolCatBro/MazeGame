@@ -259,3 +259,12 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+MazeGame.vcxproj
+MazeGame.vcxproj.filters
+.gitignore
+/MazeGame/Engine/Level.hpp
+/MazeGame/Engine/Level.cpp
+/MazeGame/Engine/SceneGraph.cpp
+/MazeGame/Engine/GameManager.hpp
+/MazeGame/Engine/GameManager.cpp

@@ -1,20 +1,22 @@
 #pragma once
 
-#include <cstdlib>
-#include <iostream>
-#include <stack>
+#include "Engine/SceneGraph.hpp"
+#include "Cell.hpp"
 
-using std::cout;
+#include <deque>
+using std::deque;
 
-class Maze
+class Maze : public Layer
 {
 	int** maze,width,height;
+	Cell *cell;
 
-	void _create(int x,int y);
+	void _createPath(deque<vector<int> >& path,int x,int y,int d);
 	bool _getNeighbour(int x, int y, int t);
+
 public:
-	Maze(int width,int height);
+	Maze(Scene* scene,int width,int height);
 	void createMaze();
-	void display();
+	void render(double &dt);
 };
 
