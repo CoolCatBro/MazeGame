@@ -11,14 +11,20 @@ int main()
 	Player* pl = new Player(&gm);
 	maze->addNode(pl);
 	gm.addLayer(maze);
+
 	gm.load();
+
 	maze->createMaze();
+	maze->saveMaze();
 	maze->findPath();
 
+	double k = 0.0;
 	while (1)
 	{
 		if (_kbhit())
+		{
 			pl->move(_getch());
+		}
 		gm.render();
 		gm.gameEng.refresh();
 	}

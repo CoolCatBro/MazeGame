@@ -1,6 +1,4 @@
 #include "Maze.hpp"
-#include <iostream>
-using namespace std;
 
 Maze::Maze(GameManager *gm,int width, int height)
 	 :Layer(gm,"maze"),width(width),height(height),dist(1,4)
@@ -95,10 +93,10 @@ bool Maze::_getNeighbour(Vertex* V, int t)
 	return false;
 }
 
-void Maze::createMaze()
+void Maze::createMaze(bool load)
 {
+	if(!load)
 	_createPath(graph,new Vertex(0,0,0));
-
 
 	for(auto i = graph.Edges.begin(); i!=graph.Edges.end(); i++)
 	{
@@ -159,8 +157,6 @@ void Maze::findPath()
 
 	while (!que.empty())
 	{
-		maze[que[0]->y][que[0]->x] = 1;
-
 		if (que[0]->x == width - 1 && que[0]->y == height - 1)
 		{
 			spath.push_front(pair<int,int>(width - 1, height - 1));
@@ -169,11 +165,8 @@ void Maze::findPath()
 
 		for (auto i = que[0]->Edges.begin(); i != que[0]->Edges.end(); i++)
 		{
-			if (!maze[(*i)->y][(*i)->x])
-			{
-				que.push_back(*i);
-				pred[(*i)->y][(*i)->x] = que[0];
-			}
+			que.push_back(*i);
+			pred[(*i)->y][(*i)->x] = que[0];
 		}
 		que.pop_front();
 	}
@@ -197,6 +190,64 @@ void Maze::displayPath()
 		cell->setValue(" * ", k);
 		i++;
 	}
+}
+
+void Maze::saveMaze()
+{
+	ofstream file;
+	file.open("save\\map.txt", std::ios::out);
+
+	deque<Vertex*> que;
+
+	que.push_front(graph.Edges.front());
+
+	while (!que.empty())
+	{
+		file << que.front()->x << " " << que.front()->y << " " << que.front()->d << " ";
+		for (auto i = que.front()->Edges.begin(); i != que.front()->Edges.end(); i++)
+		{
+			file << (*i)->x<< " " << (*i)->y << " " << (*i)->d << " ";
+			que.push_back(*i);
+		}
+		que.pop_front();
+		file << std::endl;
+	}
+
+	file.close();
+}
+
+void Maze::loadMaze()
+{
+
+	ifstream file;
+	file.open("save\\map.txt",std::ios::in);
+	assert(file);
+
+	string temp;
+	deque<Vertex*> que;
+
+	que.push_front(new Vertex(0, 0, 0));
+
+	while (getline(file, temp))
+	{
+		stringstream ss(temp);
+
+		int x=0, y=0, d=0;
+		ss >> x; ss >> y; ss >> d;
+
+		graph.addEdge(que.front());
+
+		while (ss>>x && ss>>y && ss>>d)
+		{
+			Vertex* V = new Vertex(x, y, d);
+			que.front()->addEdge(V);
+			que.push_back(V);
+		}
+		que.pop_front();
+	}
+	file.close();
+
+	createMaze(true);
 }
 
 void Maze::reset()

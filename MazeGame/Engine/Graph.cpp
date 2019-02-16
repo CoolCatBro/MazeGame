@@ -1,7 +1,7 @@
 #include "Graph.hpp"
 
 
-Vertex::Vertex(int x, int y, int d = 0)
+Vertex::Vertex(int x, int y, int d)
 {
 	this->x = x;
 	this->y = y;

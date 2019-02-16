@@ -12,7 +12,7 @@ public:
 	list<Vertex*> Edges;
 
 
-	Vertex(int x, int y, int d);
+	Vertex(int x, int y, int d=0);
 
 	void clear();
 	void addEdge(Vertex* V);
