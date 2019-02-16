@@ -14,7 +14,6 @@ Maze::Maze(Scene* scene,int width, int height)
 	}
 
 	cell = new Cell(scene, width*height);
-	Layer::addNode(cell);
 
 	rng.seed(std::random_device()());
 }
@@ -197,6 +196,12 @@ void Maze::findPath()
 	cell->setValue(" E ", cell->nframe - 1);
 }
 
+void Maze::load()
+{
+	cell->load();
+	Layer::load();
+}
+
 void Maze::render(double &dt)
 {
 
@@ -214,4 +219,7 @@ void Maze::render(double &dt)
 			cell->y += cell->height;
 		}
 	}
+	cell->x = 0;
+	cell->y = 0;
+	Layer::render(dt);
 }

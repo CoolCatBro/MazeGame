@@ -117,6 +117,9 @@
   <ItemGroup>
     <ClInclude Include="Cell.hpp" />
     <ClInclude Include="Engine\Engine.hpp" />
+    <ClInclude Include="Engine\GameManager.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Engine\Globals.hpp" />
     <ClInclude Include="Engine\Graph.hpp" />
     <ClInclude Include="Engine\SceneGraph.hpp" />
@@ -127,6 +130,9 @@
   <ItemGroup>
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\GameManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Engine\Globals.cpp" />
     <ClCompile Include="Engine\Graph.cpp" />
     <ClCompile Include="Engine\SceneGraph.cpp">

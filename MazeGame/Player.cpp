@@ -10,7 +10,7 @@ Player::Player(Scene* scene)
 
 void Player::move(char dir)
 {
-	maze->cell->setValue("*", y*maze->width + x);
+	maze->cell->setValue(" * ", y*maze->width + x);
 
 	if (dir == UP)
 		y--;
@@ -30,6 +30,6 @@ void Player::load()
 
 void Player::render(double& dt)
 {
-	maze->cell->setValue(std::to_string(PLAYERCHAR), y*maze->width + x);
+	maze->cell->setValue(" P ", y*maze->width + x);
 }
 

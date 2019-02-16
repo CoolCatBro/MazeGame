@@ -2,7 +2,7 @@
 
 //META
 int GAME_WIDTH=150;
-int GAME_HEIGHT=36;
+int GAME_HEIGHT=37;
 
 //CONTROLS
 char UP = 'w';

@@ -31,6 +31,7 @@ public:
 	Maze(Scene* scene,int width,int height);
 	void createMaze();
 	void findPath();
+	void load();
 	void render(double &dt);
 };
 
