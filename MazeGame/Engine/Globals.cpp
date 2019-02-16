@@ -9,3 +9,6 @@ char UP = 'w';
 char LEFT = 'a';
 char DOWN = 's';
 char RIGHT = 'd';
+
+//Sprites
+char PLAYERCHAR = 'P';

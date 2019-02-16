@@ -13,8 +13,8 @@ using std::pair;
 
 class Maze : public Layer
 {
-	int** maze,width,height;
-	Cell *cell;
+	int** maze;
+	
 	Graph graph;
 	deque<pair<int,int> > spath;
 
@@ -25,6 +25,9 @@ class Maze : public Layer
 	bool _getNeighbour(Vertex*, int t);
 
 public:
+	int width, height;
+	Cell *cell;
+
 	Maze(Scene* scene,int width,int height);
 	void createMaze();
 	void findPath();

@@ -12,4 +12,7 @@ extern char LEFT;
 extern char DOWN;
 extern char RIGHT;
 
+//Sprites
+extern char PLAYERCHAR;
+
 #endif

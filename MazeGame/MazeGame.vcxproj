@@ -122,6 +122,7 @@
     <ClInclude Include="Engine\SceneGraph.hpp" />
     <ClInclude Include="Engine\Sprite.hpp" />
     <ClInclude Include="Maze.hpp" />
+    <ClInclude Include="Player.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cell.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="Engine\Sprite.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
