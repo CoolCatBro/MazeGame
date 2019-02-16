@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Engine/SceneGraph.hpp"
-#include "Graph.hpp"
+#include "Engine/Graph.hpp"
 #include "Cell.hpp"
 
 #include <deque>

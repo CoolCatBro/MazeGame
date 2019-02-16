@@ -36,7 +36,7 @@
     <ClCompile Include="Engine\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graph.cpp">
+    <ClCompile Include="Engine\Graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,7 +59,7 @@
     <ClInclude Include="Engine\Sprite.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graph.hpp">
+    <ClInclude Include="Engine\Graph.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
