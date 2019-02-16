@@ -4,7 +4,7 @@
 
 Scene::Scene(){}
 
-Scene::Scene(int width,int height):game(width,height){}
+Scene::Scene(int width,int height):gameEng(width,height){}
 
 Scene::~Scene()
 {

@@ -11,4 +11,4 @@ char DOWN = 's';
 char RIGHT = 'd';
 
 //Sprites
-char PLAYERCHAR = 'P';
+string PLAYER = " P ";

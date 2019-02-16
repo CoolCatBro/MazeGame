@@ -2,8 +2,8 @@
 #include <iostream>
 using namespace std;
 
-Maze::Maze(Scene* scene,int width, int height)
-	 :Layer(scene,"maze"),width(width),height(height),dist(1,4)
+Maze::Maze(GameManager *gm,int width, int height)
+	 :Layer(gm,"maze"),width(width),height(height),dist(1,4)
 {
 	maze = new int*[height];
 	for (int i = 0; i < height; i++)
@@ -13,7 +13,7 @@ Maze::Maze(Scene* scene,int width, int height)
 			maze[i][j] = 1;
 	}
 
-	cell = new Cell(scene, width*height);
+	cell = new Cell(gm, width*height);
 
 	rng.seed(std::random_device()());
 }
@@ -185,15 +185,18 @@ void Maze::findPath()
 		tmp = pred[tmp->y][tmp->x];
 	}
 
+	cell->setValue(" E ", cell->nframe - 1);
+}
+
+void Maze::displayPath()
+{
 	int i = 0, k = 0;
-	while (i!=spath.size()-1)
+	while (i != spath.size() - 1)
 	{
 		k = spath[i].second*width + spath[i].first;
 		cell->setValue(" * ", k);
 		i++;
 	}
-	cell->setValue(" S ", 0);
-	cell->setValue(" E ", cell->nframe - 1);
 }
 
 void Maze::load()

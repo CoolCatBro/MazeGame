@@ -3,10 +3,13 @@
 #include "SceneGraph.hpp"
 #include "Globals.hpp"
 
-class GameManager:public Scene
+
+class GameManager : public Scene
 {
 	double t;
+
 public:
+
 	int score;
 	int lives;
 

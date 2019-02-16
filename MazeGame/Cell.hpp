@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Sprite.hpp"
+#include "Engine/GameManager.hpp"
 
 class Cell : public Sprite
 {
@@ -10,7 +11,7 @@ public:
 
 	int cell;
 
-	Cell(Scene* scene,int n);
+	Cell(GameManager* gm,int n);
 	void setValue(string value,int n);
 	void removeSide(int cell, int side);
 	void load();

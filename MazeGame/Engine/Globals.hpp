@@ -1,6 +1,8 @@
 #ifndef  _GLOBALS_
 #define _GLOBALS_
 
+#include <string>
+using std::string;
 
 //META
 extern int GAME_WIDTH;
@@ -13,6 +15,6 @@ extern char DOWN;
 extern char RIGHT;
 
 //Sprites
-extern char PLAYERCHAR;
+extern string PLAYER;
 
 #endif

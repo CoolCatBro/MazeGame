@@ -2,8 +2,8 @@
 
 
 
-Player::Player(Scene* scene)
-	:Node(scene, "player")
+Player::Player(GameManager* gm)
+	:Node(gm, "player"),gm(gm)
 {
 	x = 0; y = 0;
 }
@@ -12,15 +12,30 @@ void Player::move(char dir)
 {
 	maze->cell->setValue(" * ", y*maze->width + x);
 
+	int p = x, q = y;
 	if (dir == UP)
-		y--;
+	{
+		q--;
+	}
 	if (dir == LEFT)
-		x--;
+	{
+		p--;
+	}
 	if (dir == RIGHT)
-		x++;
+	{
+		p++;
+	}
 	if (dir == DOWN)
-		y++;
-
+	{
+		q++;
+	}
+	if (pair<int, int>(p, q) == maze->spath[gm->score+1])
+	{
+		x = p; y = q;
+		gm->score++;
+	}
+	else
+		gm->lives--;
 }
 
 void Player::load()
@@ -30,6 +45,6 @@ void Player::load()
 
 void Player::render(double& dt)
 {
-	maze->cell->setValue(" P ", y*maze->width + x);
+	maze->cell->setValue(PLAYER, y*maze->width + x);
 }
 

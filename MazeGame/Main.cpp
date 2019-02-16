@@ -20,7 +20,7 @@ int main()
 		if (_kbhit())
 			pl->move(_getch());
 		gm.render();
-		gm.game.refresh();
+		gm.gameEng.refresh();
 	}
 
 	return 0;

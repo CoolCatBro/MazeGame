@@ -6,9 +6,19 @@ GameManager::GameManager(int width, int height)
 	t = 0.0;
 }
 
-
 void GameManager::render()
 {
-	Scene::render(t);
-	game.mvprintW(1,GAME_HEIGHT-1, "Score:" + std::to_string(score));
+	if (lives > 0)
+	{
+		Scene::render(t);
+		gameEng.mvprintW(1, GAME_HEIGHT - 1, "Score:" + std::to_string(score));
+		gameEng.mvprintW(GAME_WIDTH - 8, GAME_HEIGHT - 1, "Lives:" + std::to_string(lives));
+	}
+	else
+	{
+		gameEng.clear();
+		gameEng.mvprintW(GAME_WIDTH/2 - 5, GAME_HEIGHT/2, "GAME OVER");
+		gameEng.refresh();
+		Sleep(2500);
+	}
 }

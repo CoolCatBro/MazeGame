@@ -1,8 +1,8 @@
 #include "Cell.hpp"
 
 
-Cell::Cell(Scene* scene,int n)
-	 :Sprite(scene,"cell",5,3,0,0,n),cell(0)
+Cell::Cell(GameManager* gm,int n)
+	 :Sprite(gm,"cell",5,3,0,0,n),cell(0)
 {
 }
 
@@ -83,6 +83,6 @@ void Cell::render(double &dt)
 {
 	for (int i = 0; i < height; i++)
 	{
-		scene->game.mvprintW(x, y + i, frames[cell][i]);
+		scene->gameEng.mvprintW(x, y + i, frames[cell][i]);
 	}
 }

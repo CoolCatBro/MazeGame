@@ -20,7 +20,7 @@ protected:
 
 public:
 
-	Engine game;
+	Engine gameEng;
 
 	Scene();
 	Scene(int width,int height);
