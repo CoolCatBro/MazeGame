@@ -1,8 +1,8 @@
 #include "Globals.hpp"
 
 //META
-int GAME_WIDTH=150;
-int GAME_HEIGHT=37;
+int GAME_WIDTH=165;
+int GAME_HEIGHT=40;
 
 //CONTROLS
 char UP = 'w';

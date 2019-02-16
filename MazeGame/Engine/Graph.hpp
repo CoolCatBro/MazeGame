@@ -11,8 +11,10 @@ public:
 	int x,y,d;
 	list<Vertex*> Edges;
 
+
 	Vertex(int x, int y, int d);
 
+	void clear();
 	void addEdge(Vertex* V);
 };
 
@@ -23,5 +25,6 @@ public:
 	list<Vertex*> Edges;
 	
 	void addEdge(Vertex* V);
+	void clear();
 };
 

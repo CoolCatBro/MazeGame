@@ -8,13 +8,15 @@ class Player : public Node
 {
 	Maze* maze;
 	GameManager* gm;
-
+	int mv;
 public:
 
+	int level;
 	int x, y;
 
 	Player(GameManager* gm);
 	void move(char dir);
+	void reset();
 	void load();
 	void render(double& dt);
 };

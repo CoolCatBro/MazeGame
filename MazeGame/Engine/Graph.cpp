@@ -1,5 +1,6 @@
 #include "Graph.hpp"
 
+
 Vertex::Vertex(int x, int y, int d = 0)
 {
 	this->x = x;
@@ -12,7 +13,26 @@ void Vertex::addEdge(Vertex* V)
 	Edges.push_back(V);
 }
 
+void Vertex::clear()
+{
+	while (!Edges.empty())
+	{
+		Edges.front()->clear();
+		Edges.pop_front();
+	}
+}
+
+
 void Graph::addEdge(Vertex *V)
 {
 	Edges.push_back(V);
+}
+
+void Graph::clear()
+{
+	while (!Edges.empty())
+	{
+		Edges.front()->clear();
+		Edges.pop_front();
+	}
 }

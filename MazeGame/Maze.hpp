@@ -33,6 +33,7 @@ public:
 	void createMaze();
 	void findPath();
 	void displayPath();
+	void reset();
 	void load();
 	void render(double &dt);
 };

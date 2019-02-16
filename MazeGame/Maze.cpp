@@ -199,6 +199,21 @@ void Maze::displayPath()
 	}
 }
 
+void Maze::reset()
+{
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			cell->setValue("   ",i*width + j);
+			maze[i][j] = 1;
+		}
+	}
+	cell->load();
+	graph.clear();
+	spath.clear();
+}
+
 void Maze::load()
 {
 	cell->load();
