@@ -3,7 +3,6 @@
 #include "SceneGraph.hpp"
 #include "Globals.hpp"
 
-
 class GameManager : public Scene
 {
 	double t;
@@ -14,5 +13,5 @@ public:
 	int lives;
 
 	GameManager(int width,int height);
-	void render();
+	void render(bool menuact=false);
 };

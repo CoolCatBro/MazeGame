@@ -135,6 +135,8 @@ void Maze::createMaze(bool load)
 			}
 		}
 	}
+
+	findPath();
 	
 }
 
@@ -218,6 +220,7 @@ void Maze::saveMaze()
 
 void Maze::loadMaze()
 {
+	reset();
 
 	ifstream file;
 	file.open("save\\map.txt",std::ios::in);

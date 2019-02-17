@@ -123,6 +123,7 @@
     <ClInclude Include="Engine\Sprite.hpp" />
     <ClInclude Include="Engine\GameManager.hpp" />
     <ClInclude Include="Maze.hpp" />
+    <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Player.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +138,7 @@
     <ClCompile Include="Engine\GameManager.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

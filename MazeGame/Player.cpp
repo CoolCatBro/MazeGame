@@ -1,7 +1,6 @@
 #include "Player.hpp"
 
 
-
 Player::Player(GameManager* gm)
 	:Node(gm, "player"),gm(gm)
 {
@@ -37,6 +36,43 @@ void Player::move(char dir)
 	}
 	else
 		gm->lives--;
+}
+
+void Player::savePlayer()
+{
+	ofstream file;
+
+	file.open("save\\player.txt", std::ios::out);
+	assert(file);
+
+	file << x << " " << y<<" "
+		 << level<<" "
+		 << gm->score<<" "
+		 << gm->lives;
+	file.close();
+}
+
+void Player::loadPlayer()
+{
+	ifstream file;
+
+	file.open("save\\player.txt", std::ios::in);
+	assert(file);
+
+	file >> x >> y
+		 >> level
+		 >> gm->score
+		 >> gm->lives;
+	file.close();
+
+
+	mv = 0;
+	while (maze->spath[mv] != pair<int, int>(x, y))
+	{
+		int i = maze->spath[mv].second * maze->width + maze->spath[mv].first;
+		maze->cell->setValue(" * ", i);
+		mv++;
+	}
 }
 
 void Player::reset()
